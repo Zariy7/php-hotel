@@ -1,0 +1,17 @@
+*,
+*::after,
+*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background-color: rgb(119, 165, 49);
+    color: rgb(107, 53, 53);
+}
+
+footer{
+    background-color: rgb(73, 72, 72);
+    color: rgb(158, 176, 177);
+}
