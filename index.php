@@ -68,7 +68,7 @@
 
                         foreach($hotels as $key => $hotel){
                             echo '<tr>';
-                            echo '<th scope="row">'.$key.'</th>';
+                            echo '<th scope="row">'.($key+1).'</th>';
 
                             foreach($hotel as $info){
                                 if($info === true){
