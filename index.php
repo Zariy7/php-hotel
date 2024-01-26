@@ -37,6 +37,37 @@
         ],
     ];
 
+    $filteredHotels = $hotels;
+
+    if(isset($_GET['parking']) && $_GET['parking']!=''){
+        $parkingFilter = $_GET['parking'];
+        if($parkingFilter === 'true'){
+            $parkingFilter = true;
+        }
+        else{
+            $parkingFilter = false;
+        }
+
+        foreach($filteredHotels as $key => $hotel){
+            if($filteredHotels[$key]['parking'] != $parkingFilter){
+                unset($filteredHotels[$key]);
+            }
+        }
+    }
+
+    //var_dump($filteredHotels);
+
+    if(isset($_GET['rating']) && $_GET['rating']!=''){
+        $voteFilter = $_GET['rating'];
+
+        foreach($filteredHotels as $key => $hotel){
+            if($filteredHotels[$key]['vote'] < $voteFilter){
+                unset($filteredHotels[$key]);
+            }
+        }
+    }
+
+    //var_dump($filteredHotels);
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +86,36 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
+                        <form action="./index.php" method="GET">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="parking" class="form-label">Parking?</label>
+                                        <select name="parking" id="parking" class="form-select">
+                                            <option value="">Any</option>
+                                            <option value="true">Yes</option>
+                                            <option value="false">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="rating" class="form-label">Rating?</label>
+                                        <select name="rating" id="rating" class="form-select">
+                                            <option value="">Any</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="submit" value="Filter" class="btn btn-success">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12">
                         <?php 
                             echo '<table class="table">';
                             
@@ -70,7 +131,7 @@
                                 </tr>
                             </thead>';
     
-                            foreach($hotels as $key => $hotel){
+                            foreach($filteredHotels as $key => $hotel){
                                 echo '<tr>';
                                 echo '<th scope="row">'.($key+1).'</th>';
     
