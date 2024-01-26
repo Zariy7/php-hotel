@@ -131,26 +131,18 @@
                                 </tr>
                             </thead>';
     
+                            echo '<tbody>';
                             foreach($filteredHotels as $key => $hotel){
                                 echo '<tr>';
                                 echo '<th scope="row">'.($key+1).'</th>';
-    
-                                foreach($hotel as $info){
-                                    if($info === true){
-                                        echo '<td> Yes </td>';
-                                    }
-                                    else{
-                                        if($info === false){
-                                            echo '<td> No </td>';
-                                        }
-                                        else{
-                                            echo '<td>'.$info.'</td>';
-                                        }
-                                    }
-                                }
-    
+                                echo '<td>'.$hotel['name'].'</td>';
+                                echo '<td>'.$hotel['description'].'</td>';
+                                echo '<td>'.($hotel['parking'] ? 'Yes' : 'No').'</td>';
+                                echo '<td>'.$hotel['vote'].'</td>';
+                                echo '<td>'.$hotel['distance_to_center'].'</td>';
                                 echo '</tr>';
                             }
+                            echo '</tbody>';
     
                             echo '</table>';
                         ?>
